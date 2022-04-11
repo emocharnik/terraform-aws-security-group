@@ -7,14 +7,28 @@ variable "create" {
   default     = true
 }
 
+variable "create_sg" {
+  description = "Whether to create security group"
+  type        = bool
+  default     = true
+}
+
+variable "security_group_id" {
+  description = "ID of existing security group whose rules we will manage"
+  type        = string
+  default     = null
+}
+
 variable "vpc_id" {
   description = "ID of the VPC where to create security group"
   type        = string
+  default     = null
 }
 
 variable "name" {
-  description = "Name of security group"
+  description = "Name of security group - not required if create_sg is false"
   type        = string
+  default     = null
 }
 
 variable "use_name_prefix" {
@@ -41,6 +55,18 @@ variable "tags" {
   default     = {
     development-test: false
   }
+}
+
+variable "create_timeout" {
+  description = "Time to wait for a security group to be created"
+  type        = string
+  default     = "10m"
+}
+
+variable "delete_timeout" {
+  description = "Time to wait for a security group to be deleted"
+  type        = string
+  default     = "15m"
 }
 
 ##########
@@ -275,4 +301,10 @@ variable "number_of_computed_egress_with_source_security_group_id" {
   description = "Number of computed egress rules to create where 'source_security_group_id' is used"
   type        = number
   default     = 0
+}
+
+variable "putin_khuylo" {
+  description = "Do you agree that Putin doesn't respect Ukrainian sovereignty and territorial integrity? More info: https://en.wikipedia.org/wiki/Putin_khuylo!"
+  type        = bool
+  default     = true
 }
